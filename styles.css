@@ -1,0 +1,473 @@
+/* Reset y estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #0b0c10;
+  color: #f0f0f0;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Fondo animado con líneas de velocidad */
+.bg-speed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: radial-gradient(circle at 20% 30%, #1a0f1e, #0a0510 80%);
+  overflow: hidden;
+}
+
+.bg-speed::before,
+.bg-speed::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 40px,
+    rgba(255, 60, 120, 0.04) 40px,
+    rgba(255, 60, 120, 0.04) 80px
+  );
+  animation: speedLines 12s linear infinite;
+  transform: rotate(25deg);
+  top: -50%;
+  left: -50%;
+}
+
+.bg-speed::after {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 60px,
+    rgba(255, 200, 0, 0.04) 60px,
+    rgba(255, 200, 0, 0.04) 120px
+  );
+  animation-duration: 18s;
+  animation-direction: reverse;
+}
+
+@keyframes speedLines {
+  0%   { transform: translateX(0) rotate(25deg); }
+  100% { transform: translateX(-200px) rotate(25deg); }
+}
+
+/* Partículas brillantes (chispas) */
+.spark {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #ff4d00;
+  border-radius: 50%;
+  box-shadow: 0 0 15px #ff9500, 0 0 30px #ff4d00;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  animation: floatSpark 6s infinite ease-in-out;
+}
+
+@keyframes floatSpark {
+  0%   { transform: translateY(0) scale(1);       opacity: 0.7; }
+  50%  { transform: translateY(-30px) scale(1.5); opacity: 0.3; }
+  100% { transform: translateY(0) scale(1);       opacity: 0.7; }
+}
+
+/* Corazones flotantes 💖 */
+.heart {
+  position: fixed;
+  bottom: -50px;
+  font-size: 24px;
+  pointer-events: none;
+  z-index: 1;
+  animation: floatHeart linear forwards;
+  filter: drop-shadow(0 0 8px #ff3366);
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    transform: translateY(-110vh) rotate(360deg) scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 60px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header con estilo de llamas */
+header {
+  text-align: center;
+  padding: 50px 0 30px;
+  position: relative;
+}
+
+.para-ti {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: #ff87b0;
+  text-shadow: 0 0 10px #ff3366;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 9vw, 5.5rem);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #fff;
+  text-shadow: 
+    0 0 10px #ff3366,
+    0 0 20px #ff4d00,
+    0 0 40px #ff4d00,
+    0 0 80px #ff9500;
+  animation: flamePulse 2s infinite alternate;
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+h1::before,
+h1::after {
+  content: "🏎️";
+  font-size: 0.7em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 0 15px #ff9500);
+  animation: flicker 1.5s infinite alternate;
+}
+
+h1::before { left: -70px; }
+h1::after  { right: -70px; }
+
+@keyframes flamePulse {
+  0%   { text-shadow: 0 0 10px #ff3366, 0 0 20px #ff4d00, 0 0 40px #ff9500; }
+  100% { text-shadow: 0 0 15px #ff87b0, 0 0 30px #ff3366, 0 0 60px #ff4d00, 0 0 100px #ff9500; }
+}
+
+@keyframes flicker {
+  0%   { opacity: 0.7; transform: translateY(-50%) scale(0.9); }
+  100% { opacity: 1;   transform: translateY(-50%) scale(1.2); }
+}
+
+.subtitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  color: #ffb347;
+  text-shadow: 0 0 12px #ff3366;
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.dedicatoria {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: #ffccdd;
+  margin-top: 20px;
+  letter-spacing: 1px;
+}
+
+/* Sección de tarjetas */
+.cards-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 0 40px;
+}
+
+.card {
+  background: rgba(30, 15, 25, 0.8);
+  backdrop-filter: blur(6px);
+  border: 2px solid rgba(255, 60, 120, 0.5);
+  border-radius: 24px;
+  padding: 30px 20px;
+  width: 280px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 60, 120, 0.3);
+  animation: cardAppear 0.8s ease backwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.3s; }
+.card:nth-child(3) { animation-delay: 0.5s; }
+
+@keyframes cardAppear {
+  from { opacity: 0; transform: translateY(40px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.card:hover {
+  transform: translateY(-12px) scale(1.02);
+  border-color: #ff87b0;
+  box-shadow: 0 20px 40px rgba(255, 60, 120, 0.5), 0 0 40px #ff3366;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,120,180,0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.car-icon {
+  font-size: 4.5rem;
+  margin-bottom: 15px;
+  display: inline-block;
+  animation: carBounce 2s infinite ease-in-out;
+  filter: drop-shadow(0 0 10px #ff3366);
+}
+
+@keyframes carBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+.card h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #ff87b0;
+  text-shadow: 0 0 10px #ff3366;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.card p {
+  color: #f0d0e0;
+  font-weight: 300;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* Galería de pistas animadas */
+.track-showcase {
+  margin: 70px 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.track {
+  width: 200px;
+  height: 100px;
+  background: linear-gradient(45deg, #2a1a25, #1a0a15);
+  border-radius: 50px 50px 20px 20px;
+  position: relative;
+  border: 2px solid #ff3366;
+  box-shadow: 0 0 25px rgba(255, 51, 102, 0.6);
+  overflow: hidden;
+}
+
+.track::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, #ffcc00 0px, #ffcc00 15px, #ff3366 15px, #ff3366 30px);
+  animation: dashMove 1s linear infinite;
+}
+
+@keyframes dashMove {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-30px); }
+}
+
+.track .mini-car {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-size: 2.5rem;
+  animation: drive 3s infinite linear;
+  filter: drop-shadow(0 0 8px #ff3366);
+}
+
+@keyframes drive {
+  0%   { left: 10px;              transform: scaleX(1); }
+  45%  { left: calc(100% - 50px); transform: scaleX(1); }
+  50%  { left: calc(100% - 50px); transform: scaleX(-1); }
+  95%  { left: 10px;              transform: scaleX(-1); }
+  100% { left: 10px;              transform: scaleX(1); }
+}
+
+.track:nth-child(2) .mini-car {
+  animation-duration: 4s;
+  animation-delay: 0.5s;
+}
+
+.track:nth-child(3) .mini-car {
+  animation-duration: 3.5s;
+  animation-delay: 1s;
+}
+
+/* Frase inspiradora */
+.quote {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 60px 0 40px;
+  padding: 25px;
+  border-left: 6px solid #ff3366;
+  border-right: 6px solid #ff3366;
+  background: rgba(30, 0, 15, 0.5);
+  border-radius: 50px;
+  letter-spacing: 1px;
+  animation: glowPulse 3s infinite alternate;
+}
+
+@keyframes glowPulse {
+  0%   { text-shadow: 0 0 10px #ff3366; border-color: #ff3366; }
+  100% { text-shadow: 0 0 25px #ff87b0, 0 0 35px #ff4d00; border-color: #ff87b0; }
+}
+
+/* Carta de amor */
+.love-letter {
+  background: rgba(30, 15, 25, 0.85);
+  border: 2px dashed #ff3366;
+  border-radius: 24px;
+  padding: 35px 30px;
+  margin: 50px auto;
+  max-width: 750px;
+  box-shadow: 0 0 30px rgba(255, 51, 102, 0.4);
+  text-align: center;
+  animation: cardAppear 1s ease backwards;
+  animation-delay: 0.7s;
+}
+
+.love-letter h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  color: #ff87b0;
+  text-shadow: 0 0 10px #ff3366;
+  margin-bottom: 20px;
+}
+
+.love-letter p {
+  color: #f0d0e0;
+  font-size: 1.05rem;
+  margin-bottom: 15px;
+  line-height: 1.8;
+}
+
+.love-letter .firma {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.6rem;
+  color: #ffb347;
+  margin-top: 20px;
+  text-shadow: 0 0 10px #ff3366;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 70px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 60, 120, 0.3);
+  font-size: 0.9rem;
+  color: #888;
+}
+
+footer span {
+  color: #ff3366;
+  font-weight: bold;
+}
+
+/* Botón con movimiento */
+.btn-wrapper {
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  margin: 30px auto 0;
+  padding: 18px 50px;
+  background: linear-gradient(45deg, #ff3366, #ff87b0);
+  color: #0b0c10;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 50px;
+  letter-spacing: 3px;
+  box-shadow: 0 0 25px #ff3366, 0 5px 0 #aa0033;
+  transition: all 0.2s ease;
+  animation: btnWobble 2s infinite alternate;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 50px #ff87b0, 0 7px 0 #aa0033;
+  background: linear-gradient(45deg, #ff87b0, #ffcc00);
+}
+
+@keyframes btnWobble {
+  0%   { transform: rotate(-1deg) scale(1); }
+  100% { transform: rotate(1deg) scale(1.02); }
+}
+
+/* Animación de sacudida global */
+@keyframes shake {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  20%  { transform: translate(-5px, 2px) rotate(-0.5deg); }
+  40%  { transform: translate(5px, -2px) rotate(0.5deg); }
+  60%  { transform: translate(-3px, 1px) rotate(-0.3deg); }
+  80%  { transform: translate(3px, -1px) rotate(0.3deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Ajustes responsive */
+@media (max-width: 700px) {
+  h1::before, h1::after { display: none; }
+  .card { width: 100%; max-width: 320px; }
+  .quote { font-size: 1.4rem; padding: 15px; }
+  .track { width: 150px; height: 80px; }
+  .track .mini-car { font-size: 2rem; bottom: 5px; }
+  .para-ti { font-size: 1.4rem; }
+  .subtitle { font-size: 1.8rem; }
+  .love-letter { padding: 25px 20px; }
+  .love-letter h3 { font-size: 1.7rem; }
+}
